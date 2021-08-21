@@ -11,7 +11,7 @@ function publishContract(contractName, networkName) {
       .readFileSync(`${deploymentsDir}/${networkName}/${contractName}.json`)
       .toString();
     contract = JSON.parse(contract);
-    const graphConfigPath = `${graphDir}/config/config.json`;
+    const graphConfigPath = `${graphDir}/config/${networkName}/config.json`;
     let graphConfig;
     try {
       if (fs.existsSync(graphConfigPath)) {
@@ -24,7 +24,7 @@ function publishContract(contractName, networkName) {
     }
 
     graphConfig = JSON.parse(graphConfig);
-    graphConfig[`${networkName}_${contractName}Address`] = contract.address;
+    graphConfig[`${contractName}Address`] = contract.address;
 
     const folderPath = graphConfigPath.replace("/config.json", "");
     if (!fs.existsSync(folderPath)) {

@@ -4,10 +4,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: IpNftFactory
-    network: localhost
+    network: {{network}}
     source:
-      address: "{{localhost_IpNftFactoryAddress}}"
+      address: "{{IpNftFactoryAddress}}"
       abi: Factory
+      startBlock: {{startBlock}}
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.2
@@ -15,20 +16,20 @@ dataSources:
       file: ./src/mappings/factory.ts
       abis:
         - name: Factory
-          file: ./abis/localhost_IpNftFactory.json
+          file: ./abis/{{network}}_IpNftFactory.json
       entities:
         - IpNft
-        - OwnershipTransferred
+        - FactoryOwnershipTransferred
       eventHandlers:
         - event: NewIpNft(address,address,string,string)
           handler: handleNewIpNft
         - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleOwnerShipTransferred
+          handler: handleFactoryOwnerShipTransferred
 
 templates:
   - kind: ethereum/contract
     name: IpNft
-    network: localhost
+    network: {{network}}
     source:
       abi: IpNft
     mapping:
@@ -38,7 +39,7 @@ templates:
       file: ./src/mappings/ipnft.ts
       abis:
         - name: IpNft
-          file: ./abis/localhost_IpNft.json
+          file: ./abis/{{network}}_IpNft.json
       entities:
         - Approval
         - ApprovalForAll

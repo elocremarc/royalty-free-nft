@@ -18,6 +18,12 @@ type OwnershipTransferred @entity {
   newOwner: Bytes! # address
 }
 
+type FactoryOwnershipTransferred @entity {
+  id: ID!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+}
+
 type Transfer @entity {
   id: ID!
   from: Bytes! # address

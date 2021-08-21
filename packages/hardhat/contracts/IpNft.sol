@@ -9,6 +9,7 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "hardhat/console.sol";
 
 contract IpNft is ERC721, ERC721URIStorage, Ownable {
     address licensor = owner();
@@ -75,7 +76,7 @@ contract IpNft is ERC721, ERC721URIStorage, Ownable {
      * @return token id of license
      **/
     function licenseIP() public payable returns (uint256) {
-        require(msg.value == licenseCost);
+        require(msg.value == licenseCost, "Value different than license Cost");
         _tokenIds.increment();
         uint256 id = _tokenIds.current();
         _mint(msg.sender, id);

@@ -1,7 +1,7 @@
 import "@nomiclabs/hardhat-ethers";
 import "@nomiclabs/hardhat-waffle";
 import "@typechain/hardhat";
-import { task, HardhatUserConfig} from "hardhat/config";
+import { task, HardhatUserConfig } from "hardhat/config";
 import { HttpNetworkUserConfig } from "hardhat/types";
 import "hardhat-deploy";
 import * as dotenv from "dotenv";
@@ -12,7 +12,6 @@ dotenv.config();
 // const MNEMONIC = fs.readFileSync("../../.envrc").toString().trim();
 const MUMBAI_API_KEY = process.env.MUMBAI_API_KEY;
 const MNEMONIC = process.env.MNEMONIC as string;
-console.log(process.env.MATIC_MAINNET_URL)
 
 const DEBUG = false;
 
@@ -21,7 +20,7 @@ const DEBUG = false;
 //
 const defaultNetwork = "localhost";
 
-function mnemonic() : string {
+function mnemonic(): string {
   try {
     return fs.readFileSync("./mnemonic.txt").toString().trim();
   } catch (e) {
@@ -39,7 +38,7 @@ const config: HardhatUserConfig = {
   namedAccounts: {
     deployer: {
       default: 0,
-    }
+    },
   },
   solidity: {
     compilers: [
@@ -48,71 +47,71 @@ const config: HardhatUserConfig = {
         settings: {
           optimizer: {
             enabled: true,
-            runs: 200
-          }
-        }
+            runs: 200,
+          },
+        },
       },
       {
         version: "0.8.0",
         settings: {
           optimizer: {
             enabled: true,
-            runs: 200
-          }
-        }
+            runs: 200,
+          },
+        },
       },
       {
         version: "0.7.0",
         settings: {
           optimizer: {
             enabled: true,
-            runs: 200
-          }
-        }
+            runs: 200,
+          },
+        },
       },
       {
         version: "0.6.7",
         settings: {
           optimizer: {
             enabled: true,
-            runs: 200
-          }
-        }
+            runs: 200,
+          },
+        },
       },
       {
         version: "0.6.0",
         settings: {
           optimizer: {
             enabled: true,
-            runs: 200
-          }
-        }
-      }
-    ]
+            runs: 200,
+          },
+        },
+      },
+    ],
   },
   networks: {
     localhost: {
       url: "http://localhost:8545",
     },
     matic: {
-      chainId: 137,      
+      chainId: 137,
       url: process.env.MATIC_MAINNET_URL,
       accounts: {
-        mnemonic: mnemonic()
+        mnemonic: mnemonic(),
       },
     },
     mumbai: {
       chainId: 80001,
       url: `https://polygon-mumbai.g.alchemy.com/v2/${MUMBAI_API_KEY}`,
-      accounts: [MNEMONIC]
-    }
+      accounts: [MNEMONIC],
+    },
   },
   typechain: {
-    outDir: "../frontend/types/typechain"
+    outDir: "typechain",
   },
   etherscan: {
-    apiKey: process.env.ETHERSCAN_API_KEY
-  }
+    apiKey: process.env.ETHERSCAN_API_KEY,
+  },
 };
 
 task("accounts", "Prints the list of accounts", async (_args, hre) => {
@@ -202,7 +201,5 @@ task(
     }
   }
 );
-
-
 
 export default config;

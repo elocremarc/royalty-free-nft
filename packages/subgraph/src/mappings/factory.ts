@@ -4,7 +4,7 @@ import {
 } from "../../generated/IpNftFactory/Factory"
 import {
   IpNft,
-  OwnershipTransferred,
+  FactoryOwnershipTransferred
 } from "../../generated/schema"
 
 
@@ -18,10 +18,10 @@ export function handleNewIpNft(event: NewIpNftEvent): void {
   entity.save()
 }
 
-export function handleOwnershipTransferred(
+export function handleFactoryOwnershipTransferred(
   event: OwnershipTransferredEvent
 ): void {
-  let entity = new OwnershipTransferred(
+  let entity = new FactoryOwnershipTransferred(
     event.transaction.hash.toHex() + "-" + event.logIndex.toString()
   )
   entity.previousOwner = event.params.previousOwner
