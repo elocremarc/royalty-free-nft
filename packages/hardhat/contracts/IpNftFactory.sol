@@ -8,6 +8,7 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "./IpNft.sol";
 
 import "./interface/IIpNft.sol";
+import "hardhat/console.sol";
 
 contract IpNftFactory is Ownable {
     constructor() public {}
@@ -42,6 +43,7 @@ contract IpNftFactory is Ownable {
             IpBrandName,
             IpBrandSymbol
         );
+        console.log("here");
         return IpNftContractList;
     }
 
