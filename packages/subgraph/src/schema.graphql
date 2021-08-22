@@ -42,6 +42,6 @@ type IpNft @entity {
   factory: Factory
   address: String!
   licensor: String!
-  IpBrandName: String!
-  IpBrandSymbol: String!
+  ipBrandName: String!
+  ipBrandSymbol: String!
 }

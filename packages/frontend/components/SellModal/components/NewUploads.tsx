@@ -8,15 +8,13 @@ import {
   UnorderedList,
   Stack,
   Text,
-  Image,
-  Button,
 } from '@chakra-ui/react'
 import styled from 'styled-components'
 import Dropzone from 'react-dropzone'
 import MusicVideoAudioSVG from './MusicVideoAudioSVG'
 import React, { useState, useEffect } from 'react'
-import { ChainId, useEthers } from '@usedapp/core'
-import { ethers, providers } from 'ethers'
+import { useEthers } from '@usedapp/core'
+import { ethers } from 'ethers'
 import hardhatContracts from '../../../contracts/hardhat_contracts.json'
 import { IpNftFactory as IpNftFactoryType } from '../../../types/typechain'
 import { Photo, GalleryIndex } from '../../../utils/Types'
@@ -36,11 +34,11 @@ function NewUploads(): JSX.Element {
   const [bucketKey, setBucketKey] = useState(null)
   const [identity, setIdentity] = useState(null)
   const [multimedia, setMultimedia] = useState([])
-  const [loading, setLoading] = useState(true)
+  /*const [loading, setLoading] = useState(true)
   const [links, setLinks] = useState(null)
-  const { chainId, library } = useEthers()
+  */
 
-  let useLocalHost = true
+  const useLocalHost = true
   let IpNftFactoryContract
   if (useLocalHost) {
     IpNftFactoryContract =

@@ -24,7 +24,7 @@ dataSources:
         - event: NewIpNft(address,address,string,string)
           handler: handleNewIpNft
         - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleFactoryOwnerShipTransferred
+          handler: handleFactoryOwnershipTransferred
 
 templates:
   - kind: ethereum/contract

@@ -17,8 +17,11 @@ import Layout from '../components/layout/Layout'
 
 const COMPOUND_MARKETS = gql`
   query GetAllIpNfts {
-    ipNfts(licensor: "eq") {
+    ipNfts {
       id
+      address
+      ipBrandName
+      ipBrandSymbol
       licensor
     }
   }
@@ -31,17 +34,17 @@ function ListElement({
 }: StoredTransaction) {
   const { hash } = transaction
   return (
-    <div>
+    <Box mt={4}>
       <p>Transaction</p>
       <p>Title: {title}</p>
       <p>Hash: {hash}</p>
       <p>Date: {date}</p>
-    </div>
+    </Box>
   )
 }
 
 function GraphExampleIndex(): JSX.Element {
-  const { chainId, account } = useEthers()
+  const { account } = useEthers()
   const { loading, error, data } = useQuery(COMPOUND_MARKETS)
   const etherBalance = useEtherBalance(account)
   const [disabled, setDisabled] = useState(false)
@@ -65,7 +68,6 @@ function GraphExampleIndex(): JSX.Element {
   }
 
   useEffect(() => {
-    console.log(state)
     if (state.status != 'Mining') {
       setDisabled(false)
     }
@@ -101,11 +103,16 @@ function GraphExampleIndex(): JSX.Element {
       )}
       {!loading &&
         !error &&
-        data.ipNfts.map(({ id, licesor }) => (
-          <Box key={id} mt="8">
-            <Text>Name: {licensor}</Text>
-          </Box>
-        ))}
+        data.ipNfts.map(
+          ({ id, address, licensor, ipBrandName, ipBrandSymbol }) => (
+            <Box key={id} mt="8">
+              <Text>Licensor: {licensor}</Text>
+              <Text>Address: {address}</Text>
+              <Text>ipBrandName: {ipBrandName}</Text>
+              <Text>ipBrandSymbol: {ipBrandSymbol}</Text>
+            </Box>
+          )
+        )}
     </Layout>
   )
 }
